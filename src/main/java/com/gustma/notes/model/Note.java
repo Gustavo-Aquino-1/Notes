@@ -1,5 +1,6 @@
 package com.gustma.notes.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,6 +28,7 @@ public class Note {
   @Column(nullable = true, length = 4)
   private String pin;
   
+  @JsonIgnore
   @ManyToOne
   @JoinColumn(name = "user_id")
   private User user;
