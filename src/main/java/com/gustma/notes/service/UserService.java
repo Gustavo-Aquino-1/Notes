@@ -22,4 +22,20 @@ public class UserService {
     return repo.save(user);
   }
   
+  /**
+   * login.
+   */
+  public User login(UserDto userDto) {
+    User user = repo.findByEmail(userDto.getEmail());
+    if (user == null) { 
+      return null;
+    }
+    if (!user.getPassword().equals(DigestUtils.md5Hex(userDto.getPassword()))) {
+      return null;
+    }
+    User findUser = new User();
+    findUser.setId(user.getId());
+    findUser.setEmail(user.getEmail());
+    return findUser;
+  }
 }

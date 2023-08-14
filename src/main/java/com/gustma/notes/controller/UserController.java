@@ -26,4 +26,17 @@ public class UserController {
   public ResponseEntity<User> create(@Valid @RequestBody UserDto userDto) {
     return ResponseEntity.status(201).body(service.create(userDto));
   }
+  
+  
+  /**
+   * login.
+   */
+  @PostMapping(value = "/login", consumes = json, produces = json)
+  public ResponseEntity<User> login(@Valid @RequestBody UserDto userDto) {
+    User user = service.login(userDto);
+    if (user == null) {
+      return ResponseEntity.status(404).build();
+    }
+    return ResponseEntity.status(200).body(user);
+  }
 }
